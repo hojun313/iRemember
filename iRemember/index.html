@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.bottom_menu { position: fixed; bottom: 0px; left: 0px; width: 100%; height: 50px; z-index:100; border-top: 1px solid black; background-color: #0F58F2 }
+		.bottom_menu > div { float: left; width: 25%; height: 100%; text-align: center; padding-top: 10px; }
+		.today_type { position: fixed; bottom: 50px; left: 0px; width: 100%; height: 50px; z-index:101; border-top: 1px solid black; background-color: #0F9AFC }
+	</style>
+</head>
+<body bgcolor="#0A1C40">
+<!-- 
+	<div id="container3">
+	    <div id="container2">
+	        <div id="container1">
+	            <div id="col1">Column 1Column 1Column 1Column 1Column 1Column 1Column 1Column 1Column 1Column 1Column 1Column 1Column 1</div>
+	            <div id="col2">Column 2</div>
+	            <div id="col3">Column 3</div>
+	        </div>
+	    </div>
+	</div> -->
+	<form class="today_type">
+		<input type="text" id="typeToday" width: 100%>
+		<button type="button" onclick=AddToday()>등록</button>
+	</form>
+	
+	<div class="bottom_menu">
+		<div>
+			<img src="24clock.png" width = "30" onclick='location.href="index.html"'>
+		</div>
+		<div>
+			<img src="week.png" width="30" onclick='location.href="week.html"'>
+		</div>
+		<div>
+			<img src="ever.png" width = "30" onclick=test()>
+		</div>
+		<div>
+			<img src="human.png" width = "30">
+		</div>
+	</div>
+	
+	<script>
+		var arrToday = [[]];
+		if (JSON.parse(localStorage.getItem("arrTodayStorage")) != null){
+			arrToday = JSON.parse(localStorage.getItem("arrTodayStorage"));
+		}
+		// arrToday.push(["우유, 김치우유, 김치우유, 김치우유, 김치우유, 김치우유, 김치우유, 김치", "16:00", "주차장"])
+		// arrToday.push(["D-12", "16:00", "주차장"])
+		// arrToday.push(["C-56", "16:00", "주차장"])
+		// arrToday.push(["H-1", "16:00", "주차장"])
+		// arrToday.push(["K-61", "16:00", "주차장"])
+		// arrToday.push(["I-9", "16:00", "주차장"])
+		
+		for (i = 1; i < arrToday.length; i++){
+			document.write('<div class="flex" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; word-break: break-all;"> <div>', arrToday[i][0], '</div> <div>', arrToday[i][1], '</div> <div onclick=DeleteToday(', i, ') style="text-align:center;">', arrToday[i][2], '</div> </div>');
+		}
+		document.write('<div class="bumper" style="height:100px;"></div>');
+
+		function test(){
+			alert("a");
+		}
+
+		function AddToday() {
+			var gas = document.getElementById('typeToday').value;
+			var time = new Date();
+			var days = time.getDate();
+			var hours = time.getHours();
+			var minutes = time.getMinutes();
+			arrToday.push([gas, days + "] " + hours + ":" + minutes, "X"]);
+			localStorage.setItem("arrTodayStorage", JSON.stringify(arrToday));
+			window.location.reload();
+		}
+		
+		function DeleteToday(index){
+			if (confirm("정말 삭제하시겠습니까??") == true){
+				arrToday.splice(index, 1);
+				localStorage.setItem("arrTodayStorage", JSON.stringify(arrToday));
+				window.location.reload();
+			}
+			else { return false; }
+		}
+	</script>
+</body>
+</html>

@@ -60,7 +60,7 @@
 		document.write('<div class="bumper" style="height:100px;"></div>');
 
 		function test(){
-			alert("a");
+			alert("test");
 		}
 
 		function AddToday() {
@@ -72,6 +72,18 @@
 			arrToday.push([gas, days + "] " + hours + ":" + minutes, "X"]);
 			localStorage.setItem("arrTodayStorage", JSON.stringify(arrToday));
 			window.location.reload();
+		}
+
+		function DeleteAfter24H(){
+			var time = new Date();
+			var days = time.getDate();
+			for (i = 1; i < arrToday.length; i++){
+				if (arrToday[i][1].split("]")[0] < days){
+					arrToday.splice(i, 1);
+					localStorage.setItem("arrTodayStorage", JSON.stringify(arrToday));
+					window.location.reload();
+				}
+			}
 		}
 		
 		function DeleteToday(index){

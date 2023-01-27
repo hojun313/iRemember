@@ -48,11 +48,10 @@
 			arrToday = JSON.parse(localStorage.getItem("arrTodayStorage"));
 		}
 		// arrToday.push(["우유, 김치우유, 김치우유, 김치우유, 김치우유, 김치우유, 김치우유, 김치", "16:00", "주차장"])
-		// arrToday.push(["D-12", "16:00", "주차장"])
-		// arrToday.push(["C-56", "16:00", "주차장"])
-		// arrToday.push(["H-1", "16:00", "주차장"])
-		// arrToday.push(["K-61", "16:00", "주차장"])
-		// arrToday.push(["I-9", "16:00", "주차장"])
+		// arrToday.push(["D-12", "15:23", "주차장"])
+		// arrToday.push(["B-1", "11:10", "집"])
+		// arrToday.push(["C-1", "11:10", "집"])
+		DeleteAfter24H();
 		
 		for (i = 1; i < arrToday.length; i++){
 			document.write('<div class="flex" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; word-break: break-all;"> <div>', arrToday[i][0], '</div> <div>', arrToday[i][1], '</div> <div onclick=DeleteToday(', i, ') style="text-align:center;">', arrToday[i][2], '</div> </div>');

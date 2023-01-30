@@ -77,7 +77,7 @@
 			var time = new Date();
 			var days = time.getDate();
 			for (i = 1; i < arrToday.length; i++){
-				if (arrToday[i][1].split("]")[0] < days){
+				if (arrToday[i][1].split("]")[0] != days){
 					arrToday.splice(i, 1);
 					localStorage.setItem("arrTodayStorage", JSON.stringify(arrToday));
 					window.location.reload();
